@@ -14,8 +14,7 @@ before_install:
   - git config --global user.email "xie@yihui.name"
 
 install:
-- ls -l . ..
-- ./install-r-devel
+  - ./install-r-devel
 
 script:
   - ~/R-devel/bin/Rscript -e "sessionInfo()"
