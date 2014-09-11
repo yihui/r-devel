@@ -13,7 +13,7 @@ make -s install
 cd ~
 git clone --quiet https://${GH_TOKEN}@github.com/yihui/xran.git > /dev/null
 cd xran
-tar zcf R-devel.tar.gz ~/R-devel
+tar zcf R-devel.tar.gz -C ~ R-devel
 git add -f .
 git commit --amend -m "R-devel from Travis build $TRAVIS_BUILD_NUMBER"
 git push -fq origin gh-pages > /dev/null
