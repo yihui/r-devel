@@ -1,0 +1,23 @@
+language: python
+
+env:
+  global:
+    secure: YBi75i5AyONNJyotZXiaRSeAx7ehiQX3jpwNud8248LsNnZlh5AIWCelT/2pyRs09FAApHejwc56xF61+pyGrYyhMLfu+7LqV4vATbDgZymyCOtebmBuSKvHOxxk/jnQt7gTEttmDAlMfzo6D+oWQRc/Z6AV3VVY+Qb9lJOjIYo=
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y software-properties-common
+  - sudo add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_release -cs`/"
+  - sudo apt-get update -qq
+  - sudo apt-get build-dep -y r-base-dev
+  - sudo apt-get upgrade -y
+  - git config --global user.name "Yihui Xie"
+  - git config --global user.email "xie@yihui.name"
+
+install:
+- ls -l . ..
+- ./install-r-devel
+
+script:
+  - ~/R-devel/bin/Rscript -e "sessionInfo()"
+

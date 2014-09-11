@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# do not re-build for pull requests
+[ "$TRAVIS_PULL_REQUEST" == "true" ] && exit 0
+
+wget http://cran.rstudio.com/src/base-prerelease/R-latest.tar.gz
+tar zxf R-latest.tar.gz
+cd R-patched
+./tools/rsync-recommended
+./configure -q --prefix=$HOME/R-devel
+make -s -j2
+make -s install
+cd ~
+git clone --quiet https://${GH_TOKEN}@github.com/yihui/xran.git > /dev/null
+cd xran
+tar zcf R-devel.tar.gz ~/R-devel
+git add -f .
+git commit --amend -m "R-devel from Travis build $TRAVIS_BUILD_NUMBER"
+git push -fq origin gh-pages > /dev/null
+
